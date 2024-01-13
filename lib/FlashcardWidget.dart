@@ -12,6 +12,7 @@ class FlashcardWidget extends StatelessWidget {
     return FlipCard(
       front: Card(
         child: Container(  // Wrap the Text widget in a Container
+          color: Colors.white30,
           padding: const EdgeInsets.all(16),  // Add padding for better readability
           child: Text(
             flashcard.question,
@@ -24,6 +25,7 @@ class FlashcardWidget extends StatelessWidget {
       ),
       back: Card(
         child: Container(  // Wrap the Text widget in a Container
+          color: Colors.green,
           padding: const EdgeInsets.all(16),  // Add padding for better readability
           child: Text(
             flashcard.answer,

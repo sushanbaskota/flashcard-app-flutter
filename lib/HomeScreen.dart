@@ -1,3 +1,4 @@
+import 'package:flashcard/AddCardScreen.dart';
 import 'package:flashcard/FlashcardWidget.dart';
 import 'package:flashcard/model/Flashcard.dart';
 import 'package:flutter/material.dart';
@@ -12,40 +13,54 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
   final List<Flashcard> flashcards = [
-    // Add your flashcards here
-    Flashcard("MinHeap", "Complete Binary Tree, Always min element at root node, while inserting insert element at last of index then heapify up to maintain the heap property"),
-    Flashcard("BST", "Left node is less than right node")
+     Flashcard("init", "hhh")
   ];
 
-  // Methods for flipping cards, navigating between cards, etc.
+  Future<void> _addFlashcard() async {
+    final newCard = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AddCardScreen()),
+    );
+
+    if (newCard != null) {
+      setState(() {
+        flashcards.add(newCard);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // ... other code
       appBar: AppBar(
-        title: Text('Flashcards'),
+        title: const Text('Flashcards'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlashcardWidget(flashcard: flashcards[currentIndex]),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: () => previousCard(),
-                  child: Text('Previous'),
+                  child: const Text('Previous'),
                 ),
                 ElevatedButton(
                   onPressed: () => nextCard(),
-                  child: Text('Next'),
+                  child: const Text('Next'),
                 ),
               ],
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _addFlashcard,
+        child: const Icon(Icons.add),
       ),
     );
   }
